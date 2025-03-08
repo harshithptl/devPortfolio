@@ -1,5 +1,6 @@
 @use "../abstracts/mixins";
 @use "../abstracts/variables";
+@use "sass:color";
 
 .home-hero {
   color: #fff;
@@ -208,7 +209,7 @@
 }
 
 .experience {
-  background: lighten(variables.$themeClrPrimary, 25%);
+  background: color.scale(variables.$themeClrPrimary, $lightness: 64%);
   padding: 10rem 0;
 
   // Make "Experience" heading black
@@ -318,10 +319,10 @@
       font-weight: 700;
       font-size: 2.8rem;
       margin-bottom: 1.5rem;
+      color: #000;
       @include mixins.respond(phone) {
         font-size: 2.4rem;
       }
-      color: #000;
     }
 
     &-desc {
