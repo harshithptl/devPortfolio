@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Case Study of Automatic Number Plate Recognition</title>
+  <meta name="description" content="Case study page of Automatic Number Plate Recognition" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/png/logo.png" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;900&display=swap"
+          rel="stylesheet"
+  />
+</head>
+<body>
+<!-- HEADER -->
+<header class="header">
+  <div class="header__content">
+    <div class="header__logo-container">
+      <div class="header__logo-img-cont">
+        <img src="./assets/png/profile-photo.png" alt="Profile Logo" class="header__logo-img" />
+      </div>
+      <span class="header__logo-sub">Harshith Patil</span>
+    </div>
+    <div class="header__main">
+      <ul class="header__links">
+        <li class="header__link-wrapper"><a href="./index.html" class="header__link">Home</a></li>
+        <li class="header__link-wrapper"><a href="./index.html#about" class="header__link">About</a></li>
+        <li class="header__link-wrapper"><a href="./index.html#projects" class="header__link">Projects</a></li>
+        <li class="header__link-wrapper"><a href="./index.html#contact" class="header__link">Contact</a></li>
+      </ul>
+      <div class="header__main-ham-menu-cont">
+        <img src="./assets/svg/ham-menu.svg" alt="Hamburger Menu" class="header__main-ham-menu" />
+        <img src="./assets/svg/ham-menu-close.svg" alt="Close Menu" class="header__main-ham-menu-close d-none" />
+      </div>
+    </div>
+  </div>
+  <div class="header__sm-menu">
+    <div class="header__sm-menu-content">
+      <ul class="header__sm-menu-links">
+        <li class="header__sm-menu-link"><a href="./index.html">Home</a></li>
+        <li class="header__sm-menu-link"><a href="./index.html#about">About</a></li>
+        <li class="header__sm-menu-link"><a href="./index.html#projects">Projects</a></li>
+        <li class="header__sm-menu-link"><a href="./index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<!-- HERO SECTION -->
+<section class="project-cs-hero">
+  <div class="project-cs-hero__content">
+    <h1 class="heading-primary">Automatic Number Plate Recognition</h1>
+    <div class="project-cs-hero__info">
+      <p class="text-primary">
+        A Django-based system leveraging YOLOv4 and custom OCR for high-accuracy vehicle plate detection.
+      </p>
+    </div>
+    <div class="project-cs-hero__cta">
+      <a href="https://github.com/harshithptl/Automatic-Number-Plate-Recognition-System" class="btn btn--bg" target="_blank">Code Link</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT DETAILS -->
+<section class="project-details">
+  <div class="main-container">
+    <div class="project-details__content">
+      <div class="project-details__desc">
+        <h3 class="project-details__content-title">Project Overview</h3>
+        <p class="project-details__desc-para">
+          This system employs YOLOv4-based object detection to accurately localize vehicle number plates, achieving 95%
+          detection accuracy. Once detected, the plate regions are extracted and processed by a custom OCR module. This
+          module uses OpenCV for robust image preprocessing and a dedicated deep learning model to accurately recognize
+          alphanumeric characters.
+        </p>
+        <p class="project-details__desc-para">
+          To further enhance reliability, the system applies sophisticated filtering techniques—such as verifying that
+          the bounding box’s length exceeds its width—to discard false positives and ensure valid plate readings. This
+          comprehensive pipeline delivers precise, automated plate recognition while seamlessly handling user uploads via
+          a Django frontend.
+        </p>
+      </div>
+      <div class="project-details__tools-used">
+        <h3 class="project-details__content-title">Skills Applied</h3>
+        <div class="skills">
+          <div class="skills__skill">Python</div>
+          <div class="skills__skill">Django</div>
+          <div class="skills__skill">HTML/CSS</div>
+          <div class="skills__skill">YOLOv4</div>
+          <div class="skills__skill">OpenCV</div>
+          <div class="skills__skill">Optical Character Recognition</div>
+        </div>
+      </div>
+      <div class="project-details__links">
+        <h3 class="project-details__content-title">See Code</h3>
+        <!--<a href="#" class="btn btn--med btn--theme project-details__links-btn" target="_blank">Live Link</a>-->
+        <a href="https://github.com/harshithptl/Automatic-Number-Plate-Recognition-System" class="btn btn--med btn--theme-inv project-details__links-btn" target="_blank">Code Link</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+  <div class="main-container">
+    <div class="main-footer__upper">
+      <div class="main-footer__row main-footer__row-1">
+        <h2 class="heading heading-sm main-footer__heading-sm"><span>Social</span></h2>
+        <div class="main-footer__social-cont">
+          <a target="_blank" rel="noreferrer" href="https://linkedin.com/in/harshithptl">
+            <img class="main-footer__icon" src="./assets/png/linkedin-ico.png" alt="LinkedIn" />
+          </a>
+          <a target="_blank" rel="noreferrer" href="https://github.com/harshithptl">
+            <img class="main-footer__icon" src="./assets/png/github-ico.png" alt="GitHub" />
+          </a>
+          <a target="_blank" rel="noreferrer" href="mailto:harshithptl@gmail.com">
+            <img class="main-footer__icon" src="./assets/png/mailbox-icon.png" alt="Email"
+            />
+          </a>
+        </div>
+      </div>
+      <div class="main-footer__row main-footer__row-2">
+        <h4 class="heading heading-sm text-lt">Harshith Patil</h4>
+        <p class="main-footer__short-desc">
+          Software Engineer & Graduate Student at Northeastern University.
+          Passionate about scalable systems, finance and innovative problem-solving.
+        </p>
+      </div>
+    </div>
+    <div class="main-footer__lower">
+      &copy; 2025. Built by <a rel="noreferrer" target="_blank" href="https://github.com/harshithptl">Harshith Patil</a>. Template credits to <a rel="noreferrer" target="_blank" href="https://rammaheshwari.com">Ram Maheshwari</a>.
+    </div>
+  </div>
+</footer>
+
+<script src="./index.js"></script>
+</body>
+</html>
