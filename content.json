@@ -17,7 +17,12 @@
     {
       "company": "Hometap",
       "location": "Boston, MA",
-      "roles": [{ "title": "Software Engineering Co-op", "dates": "Jan 2026 to May 2026" }],
+      "roles": [
+        {
+          "title": "Software Engineering Co-op",
+          "dates": "Jan 2026 to May 2026"
+        }
+      ],
       "note": "Home-equity fintech",
       "points": [
         "Built Django tooling that retrieves FICO credit data into Salesforce for underwriting.",
@@ -30,8 +35,14 @@
       "company": "Gainsight",
       "location": "Bengaluru, India",
       "roles": [
-        { "title": "Software Engineer", "dates": "Feb 2024 to Jul 2024" },
-        { "title": "Associate Software Engineer", "dates": "Aug 2022 to Jan 2024" }
+        {
+          "title": "Software Engineer",
+          "dates": "Feb 2024 to Jul 2024"
+        },
+        {
+          "title": "Associate Software Engineer",
+          "dates": "Aug 2022 to Jan 2024"
+        }
       ],
       "note": "Promoted from Associate Software Engineer",
       "points": [
@@ -48,10 +59,30 @@
     }
   ],
   "internships": [
-    { "company": "Locobuzz", "title": "Python Developer Intern", "dates": "Mar 2022 to Jul 2022", "summary": "Dynamic SQL query builder (Flask, FastAPI) for real-time social media analytics dashboards." },
-    { "company": "Serri", "title": "Python Developer Intern", "dates": "Aug 2021 to Dec 2021", "summary": "Flask REST APIs, MySQL, AWS." },
-    { "company": "ResoluteAI", "title": "Machine Learning Intern", "dates": "Dec 2020 to Mar 2021", "summary": "YOLOv4 number plate recognition with a custom OCR module." },
-    { "company": "Focally", "title": "Machine Learning Intern", "dates": "Sep 2020 to Nov 2020", "summary": "Real-time gesture recognition (OpenCV, TensorFlow)." }
+    {
+      "company": "Locobuzz",
+      "title": "Python Developer Intern",
+      "dates": "Mar 2022 to Jul 2022",
+      "summary": "Dynamic SQL query builder (Flask, FastAPI) for real-time social media analytics dashboards."
+    },
+    {
+      "company": "Serri",
+      "title": "Python Developer Intern",
+      "dates": "Aug 2021 to Dec 2021",
+      "summary": "Flask REST APIs, MySQL, AWS."
+    },
+    {
+      "company": "ResoluteAI",
+      "title": "Machine Learning Intern",
+      "dates": "Dec 2020 to Mar 2021",
+      "summary": "YOLOv4 number plate recognition with a custom OCR module."
+    },
+    {
+      "company": "Focally",
+      "title": "Machine Learning Intern",
+      "dates": "Sep 2020 to Nov 2020",
+      "summary": "Real-time gesture recognition (OpenCV, TensorFlow)."
+    }
   ],
   "education": [
     {
@@ -74,7 +105,21 @@
     "repo": "https://github.com/harshithptl/clearline",
     "meta": "Solo project, Nov 2026. Public repo.",
     "summary": "Orders arrive through a REST API, are matched by a C++ matching engine, settled into a Postgres double-entry ledger exactly once, and reflected in a live balance cache and dashboard.",
-    "stack": ["Go (6 microservices)", "C++20", "Kafka (KRaft)", "PostgreSQL", "Valkey", "gRPC/protobuf", "Docker Compose", "Prometheus", "React 19 + TypeScript", "nginx", "GitHub Actions", "Playwright", "Vitest"],
+    "stack": [
+      "Go (6 microservices)",
+      "C++20",
+      "Kafka (KRaft)",
+      "PostgreSQL",
+      "Valkey",
+      "gRPC/protobuf",
+      "Docker Compose",
+      "Prometheus",
+      "React 19 + TypeScript",
+      "nginx",
+      "GitHub Actions",
+      "Playwright",
+      "Vitest"
+    ],
     "architecture": [
       "REST gateway",
       "Kafka: orders",
@@ -106,19 +151,165 @@
       "Correctness: 0 double-postings across 992 duplicate deliveries from 8 concurrent workers, checked against an independent oracle."
     ],
     "headlineStats": [
-      { "value": "20x", "label": "throughput, 100 to 2,000 trades/s" },
-      { "value": "< 150 ms", "label": "p99 order-to-ledger up to 2,000 trades/s" },
-      { "value": "0", "label": "double-postings across 992 duplicate deliveries" }
+      {
+        "value": "20x",
+        "label": "throughput, 100 to 2,000 trades/s"
+      },
+      {
+        "value": "< 150 ms",
+        "label": "p99 order-to-ledger up to 2,000 trades/s"
+      },
+      {
+        "value": "0",
+        "label": "double-postings across 992 duplicate deliveries"
+      }
     ],
     "stories": [
-      { "title": "A deadlock the harness caught", "text": "A concurrent test harness exposed a Postgres deadlock between parallel batches; fixed with consistent lock ordering and verified the deadlock returns when the fix is removed." },
-      { "title": "A race test that never raced", "text": "Mutation testing found a race test that never actually raced; rewritten with a start barrier." },
-      { "title": "A benchmark I retracted", "text": "Caught a contaminated benchmark (an open dashboard causing a full-keyspace SCAN storm), fixed both bugs, retracted the old results, and made the load generator refuse to run while a dashboard is connected." }
+      {
+        "title": "A deadlock the harness caught",
+        "text": "A concurrent test harness exposed a Postgres deadlock between parallel batches; fixed with consistent lock ordering and verified the deadlock returns when the fix is removed."
+      },
+      {
+        "title": "A race test that never raced",
+        "text": "Mutation testing found a race test that never actually raced; rewritten with a start barrier."
+      },
+      {
+        "title": "A benchmark I retracted",
+        "text": "Caught a contaminated benchmark (an open dashboard causing a full-keyspace SCAN storm), fixed both bugs, retracted the old results, and made the load generator refuse to run while a dashboard is connected."
+      }
     ],
     "scale": "~7,500 lines Go + ~4,800 lines Go tests, ~1,400 lines C++, ~1,500 lines TypeScript; 8 required CI checks per PR; 4 design-decision records.",
     "images": {
       "dashboard": "./assets/png/clearline-dashboard.png",
       "chart": "./assets/svg/clearline-benchmark.svg"
+    },
+    "diagram": {
+      "nodes": {
+        "client": {
+          "title": "Client",
+          "what": "REST + Idempotency-Key",
+          "setting": "retries reuse the key",
+          "kind": "external"
+        },
+        "gateway": {
+          "title": "Gateway",
+          "what": "Go: validate, dedupe",
+          "setting": "202 only after acks=all",
+          "kind": "service"
+        },
+        "orders": {
+          "title": "orders",
+          "what": "Kafka topic, key = symbol",
+          "setting": "retention: forever",
+          "kind": "topic"
+        },
+        "adapter": {
+          "title": "Matcher adapter",
+          "what": "Go: replays log on start",
+          "setting": "1 replica, Recreate",
+          "kind": "service"
+        },
+        "engine": {
+          "title": "C++ engine",
+          "what": "price-time priority book",
+          "setting": "gRPC, sessions",
+          "kind": "service"
+        },
+        "trades": {
+          "title": "trades",
+          "what": "Kafka topic, key = symbol",
+          "setting": "ids from offsets",
+          "kind": "topic"
+        },
+        "settlement": {
+          "title": "Settlement",
+          "what": "Go: batched set-based tx",
+          "setting": "dedupe on trade_id",
+          "kind": "service"
+        },
+        "postgres": {
+          "title": "Postgres",
+          "what": "ledger + outbox, one tx",
+          "setting": "synchronous_commit=on",
+          "kind": "store"
+        },
+        "relay": {
+          "title": "Outbox relay",
+          "what": "Go: publish, then mark",
+          "setting": "advisory-lock leader",
+          "kind": "service"
+        },
+        "events": {
+          "title": "ledger-events",
+          "what": "Kafka topic, key = account",
+          "setting": "one event per account",
+          "kind": "topic"
+        },
+        "balance": {
+          "title": "Balance service",
+          "what": "Go: batched WATCH/MULTI",
+          "setting": "worker per partition",
+          "kind": "service"
+        },
+        "valkey": {
+          "title": "Valkey",
+          "what": "balances + idempotency",
+          "setting": "appendfsync always",
+          "kind": "store"
+        },
+        "dashboard": {
+          "title": "Dashboard",
+          "what": "React + TypeScript",
+          "setting": "live via SSE",
+          "kind": "external"
+        },
+        "reconciler": {
+          "title": "Reconciler",
+          "what": "Go: 5 invariants",
+          "setting": "cache == ledger",
+          "kind": "service"
+        }
+      },
+      "caption": "Arrows follow one order. Every Kafka consumer commits its offset only after its own write is durable, and dedupes on event id, so redelivery is harmless."
+    },
+    "settleFlow": {
+      "steps": [
+        {
+          "title": "Poll a batch",
+          "what": "one Kafka partition"
+        },
+        {
+          "title": "BEGIN",
+          "what": "one Postgres transaction"
+        },
+        {
+          "title": "Dedupe",
+          "what": "INSERT ids ON CONFLICT DO NOTHING"
+        },
+        {
+          "title": "Write",
+          "what": "ledger rows + outbox rows, set-based"
+        },
+        {
+          "title": "COMMIT",
+          "what": "fsync: now durable"
+        },
+        {
+          "title": "Ack",
+          "what": "commit the Kafka offset"
+        }
+      ],
+      "duplicate": "Already settled: nothing written, still acked",
+      "crashes": [
+        {
+          "when": "Crash before COMMIT",
+          "then": "rolled back, redelivered, settled once"
+        },
+        {
+          "when": "Crash after COMMIT, before ack",
+          "then": "redelivered, dedupe skips it"
+        }
+      ]
     }
   },
   "projects": [
@@ -151,16 +342,88 @@
     }
   ],
   "moreProjects": [
-    { "title": "Blog platform", "summary": "React, Node.js, Express, MongoDB, bcrypt authentication.", "href": "./bloggity-blog.html" },
-    { "title": "Automatic Number Plate Recognition", "summary": "YOLOv4 + custom OCR, Django APIs.", "href": "./automatic-number-plate-recognition.html" }
+    {
+      "title": "Blog platform",
+      "summary": "React, Node.js, Express, MongoDB, bcrypt authentication.",
+      "href": "./bloggity-blog.html"
+    },
+    {
+      "title": "Automatic Number Plate Recognition",
+      "summary": "YOLOv4 + custom OCR, Django APIs.",
+      "href": "./automatic-number-plate-recognition.html"
+    }
   ],
   "skills": [
-    { "group": "Languages", "items": ["Java", "Python", "Go", "C++ (C++20/23)", "SQL", "TypeScript", "JavaScript"] },
-    { "group": "Backend", "items": ["Spring Boot", "Django", "FastAPI", "Flask", "gRPC", "REST", "Node.js"] },
-    { "group": "Data and messaging", "items": ["PostgreSQL", "Kafka", "RabbitMQ", "Valkey/Redis", "MongoDB", "MySQL", "Qdrant"] },
-    { "group": "Infrastructure", "items": ["Docker", "AWS", "GCP", "Terraform", "GitHub Actions", "CI/CD", "Linux"] },
-    { "group": "Observability", "items": ["Prometheus", "Grafana", "Sumo Logic"] },
-    { "group": "Frontend", "items": ["React", "TypeScript", "Tailwind"] },
-    { "group": "AI tools", "items": ["Claude Code", "Cursor"] }
+    {
+      "group": "Languages",
+      "items": [
+        "Java",
+        "Python",
+        "Go",
+        "C++ (C++20/23)",
+        "SQL",
+        "TypeScript",
+        "JavaScript"
+      ]
+    },
+    {
+      "group": "Backend",
+      "items": [
+        "Spring Boot",
+        "Django",
+        "FastAPI",
+        "Flask",
+        "gRPC",
+        "REST",
+        "Node.js"
+      ]
+    },
+    {
+      "group": "Data and messaging",
+      "items": [
+        "PostgreSQL",
+        "Kafka",
+        "RabbitMQ",
+        "Valkey/Redis",
+        "MongoDB",
+        "MySQL",
+        "Qdrant"
+      ]
+    },
+    {
+      "group": "Infrastructure",
+      "items": [
+        "Docker",
+        "AWS",
+        "GCP",
+        "Terraform",
+        "GitHub Actions",
+        "CI/CD",
+        "Linux"
+      ]
+    },
+    {
+      "group": "Observability",
+      "items": [
+        "Prometheus",
+        "Grafana",
+        "Sumo Logic"
+      ]
+    },
+    {
+      "group": "Frontend",
+      "items": [
+        "React",
+        "TypeScript",
+        "Tailwind"
+      ]
+    },
+    {
+      "group": "AI tools",
+      "items": [
+        "Claude Code",
+        "Cursor"
+      ]
+    }
   ]
 }

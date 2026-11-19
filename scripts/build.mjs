@@ -10,6 +10,8 @@ import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { architecture, settlementFlow } from './diagrams.mjs';
+
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const c = JSON.parse(readFileSync(join(root, 'content.json'), 'utf8'));
 const id = c.identity;
@@ -310,9 +312,19 @@ function clearlinePage() {
         <p class="project-details__desc-para">${esc(cl.summary)}</p>
         <p class="project-details__desc-para">${esc(cl.meta)}</p>
       </div>
-      <div class="project-details__desc">
+      <div class="project-details__desc cs-diagram">
         <h3 class="project-details__content-title">Architecture</h3>
-        ${archFlow(cl.architecture, cl.architectureNote)}
+        <figure class="diagram-figure">
+          ${architecture(cl.diagram)}
+          <figcaption>${esc(cl.diagram.caption)}</figcaption>
+        </figure>
+      </div>
+      <div class="project-details__desc cs-diagram">
+        <h3 class="project-details__content-title">Exactly-once settlement</h3>
+        <figure class="diagram-figure">
+          ${settlementFlow(cl.settleFlow)}
+          <figcaption>One transaction per partition batch. The Kafka offset is committed only after COMMIT, so any crash means redelivery, and the dedupe insert makes redelivery harmless.</figcaption>
+        </figure>
       </div>
       <div class="project-details__desc">
         <h3 class="project-details__content-title">Results</h3>
