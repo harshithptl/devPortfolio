@@ -1,0 +1,166 @@
+{
+  "identity": {
+    "name": "Harshith Patil",
+    "location": "Boston, MA",
+    "headline": "Software Engineer: backend, distributed systems, and low-latency systems",
+    "availability": "MS at Northeastern, December 2026. Available full-time from February 2027.",
+    "email": "harshithptl@gmail.com",
+    "github": "https://github.com/harshithptl",
+    "linkedin": "https://www.linkedin.com/in/harshithptl",
+    "resume": "./assets/pdf/Resume.pdf"
+  },
+  "bio": [
+    "I'm a backend engineer who makes complex data systems reliable. I spent two years at Gainsight as the de facto lead on Unification, a master data management platform serving 1,000+ enterprise customers and 60M+ records, then did a fintech co-op at Hometap building underwriting and valuation services.",
+    "Outside work, I build performance-critical systems: a C++ matching engine at 5.2 µs median latency, and Clearline, an event-driven trade settlement engine in Go, Kafka, and Postgres. I'm finishing my MS in Software Engineering Systems at Northeastern in December 2026."
+  ],
+  "experience": [
+    {
+      "company": "Hometap",
+      "location": "Boston, MA",
+      "roles": [{ "title": "Software Engineering Co-op", "dates": "Jan 2026 to May 2026" }],
+      "note": "Home-equity fintech",
+      "points": [
+        "Built Django tooling that retrieves FICO credit data into Salesforce for underwriting.",
+        "Built REST endpoints exposing proprietary home-equity valuation models to Salesforce and the DigiFi lending platform.",
+        "Refactored legacy risk valuation code using AI tools (Claude, Cursor), reviewing every change; caught an AI-generated defect that returned 500 errors from a downstream API before it shipped.",
+        "Added audit logging and event tracking across backend API endpoints."
+      ]
+    },
+    {
+      "company": "Gainsight",
+      "location": "Bengaluru, India",
+      "roles": [
+        { "title": "Software Engineer", "dates": "Feb 2024 to Jul 2024" },
+        { "title": "Associate Software Engineer", "dates": "Aug 2022 to Jan 2024" }
+      ],
+      "note": "Promoted from Associate Software Engineer",
+      "points": [
+        "Owned Unification end to end as de facto lead: a multi-tenant master data management platform that merged customer records from many source systems into one source of truth for 1,000+ enterprise customers and 60M+ records. Other teams built their features on it.",
+        "Turned enterprise customer requests into features with the PM, from design docs reviewed by architects through launch and production support.",
+        "Diagnosed a production query timeout via Postgres execution-plan analysis, traced it to a nested-loop join, and rewrote it as a single bulk operation: 30 s timeout down to 2 s.",
+        "Moved ingestion to batch processing in PostgreSQL, eliminating timeouts for the largest clients.",
+        "Improved ID resolution with hashing and encoding to match duplicate records across sources.",
+        "Built publish/subscribe event-driven sync between microservices using RabbitMQ.",
+        "Scaled Java Spring Boot services with multithreading and asynchronous processing.",
+        "Owned observability: Sumo Logic alerts routed to Slack, Grafana dashboards, incident triage.",
+        "Mentored a new hire; reviewed code; wrote JUnit tests run in CI."
+      ]
+    }
+  ],
+  "internships": [
+    { "company": "Locobuzz", "title": "Python Developer Intern", "dates": "Mar 2022 to Jul 2022", "summary": "Dynamic SQL query builder (Flask, FastAPI) for real-time social media analytics dashboards." },
+    { "company": "Serri", "title": "Python Developer Intern", "dates": "Aug 2021 to Dec 2021", "summary": "Flask REST APIs, MySQL, AWS." },
+    { "company": "ResoluteAI", "title": "Machine Learning Intern", "dates": "Dec 2020 to Mar 2021", "summary": "YOLOv4 number plate recognition with a custom OCR module." },
+    { "company": "Focally", "title": "Machine Learning Intern", "dates": "Sep 2020 to Nov 2020", "summary": "Real-time gesture recognition (OpenCV, TensorFlow)." }
+  ],
+  "education": [
+    {
+      "school": "Northeastern University, Boston",
+      "degree": "MS, Software Engineering Systems",
+      "dates": "Expected Dec 2026",
+      "logo": "./assets/png/northeastern-logo.png",
+      "coursework": "Cloud Computing, Enterprise Software Design, Data Structures and Algorithms, Object-Oriented Design, Trading Systems Engineering"
+    },
+    {
+      "school": "BMS Institute of Technology, India",
+      "degree": "BE, Computer Science",
+      "dates": "Jul 2022",
+      "logo": "./assets/png/bms-logo.png"
+    }
+  ],
+  "clearline": {
+    "title": "Clearline",
+    "tagline": "Event-driven trade settlement and double-entry ledger engine",
+    "repo": "https://github.com/harshithptl/clearline",
+    "meta": "Solo project, Nov 2026. Public repo.",
+    "summary": "Orders arrive through a REST API, are matched by a C++ matching engine, settled into a Postgres double-entry ledger exactly once, and reflected in a live balance cache and dashboard.",
+    "stack": ["Go (6 microservices)", "C++20", "Kafka (KRaft)", "PostgreSQL", "Valkey", "gRPC/protobuf", "Docker Compose", "Prometheus", "React 19 + TypeScript", "nginx", "GitHub Actions", "Playwright", "Vitest"],
+    "architecture": [
+      "REST gateway",
+      "Kafka: orders",
+      "Matcher adapter",
+      "C++ order book (gRPC)",
+      "Kafka: trades",
+      "Settlement",
+      "Postgres ledger + transactional outbox",
+      "Outbox relay",
+      "Kafka: ledger-events",
+      "Balance service",
+      "Valkey",
+      "Dashboard (Server-Sent Events)"
+    ],
+    "architectureNote": "A reconciler continuously verifies the books balance and the cache matches the ledger.",
+    "engineering": [
+      "Exactly-once effect on at-least-once Kafka: idempotent consumers, offsets committed after the DB commit, and a transactional outbox (no dual writes).",
+      "Two-layer order idempotency: Valkey response cache with compare-and-set Lua scripts plus deterministic order IDs deduped in the matcher.",
+      "Deterministic recovery: the in-memory C++ engine replays the Kafka orders log; trade IDs come from Kafka offsets, so replays are byte-identical and downstream dedupe absorbs them.",
+      "Failure handling: exponential backoff with jitter, classified errors, a dead-letter queue with a replay tool, single-active-leader outbox relay via Postgres advisory lock.",
+      "Money as NUMERIC(20,8) end to end; append-only ledger enforced by DB triggers; BigInt fixed point in the browser.",
+      "Prometheus metrics on every service, latency measured via timestamps in Kafka headers, Kafka consumer lag collector, 6 alerts unit-tested with promtool."
+    ],
+    "resultsContext": "Apple M4 (4P+6E), 16 GB, macOS, whole stack in Docker Desktop with the load generator on the same machine; full durability (Kafka acks=all on a single broker, Postgres synchronous_commit and fsync on, Valkey appendfsync=always); open-loop load, 30 s per rate, 0 request errors.",
+    "results": [
+      "Throughput scaled 20x: 100 trades/s baseline, then 731 trades/s (batched, per-partition-concurrent cache updates), then 2,000 trades/s (plus set-based batched settlement). 2,000 was the highest rate offered, so capacity was not reached.",
+      "p99 order-to-ledger under 150 ms at every measured rate up to 2,000 trades/s; p50 12.7 ms at 2,000 trades/s.",
+      "p99 at 250 trades/s: 129 ms to 23 ms (5.6x lower). Cache freshness p99: 4.8 s to 94 ms.",
+      "Correctness: 0 double-postings across 992 duplicate deliveries from 8 concurrent workers, checked against an independent oracle."
+    ],
+    "headlineStats": [
+      { "value": "20x", "label": "throughput, 100 to 2,000 trades/s" },
+      { "value": "< 150 ms", "label": "p99 order-to-ledger up to 2,000 trades/s" },
+      { "value": "0", "label": "double-postings across 992 duplicate deliveries" }
+    ],
+    "stories": [
+      { "title": "A deadlock the harness caught", "text": "A concurrent test harness exposed a Postgres deadlock between parallel batches; fixed with consistent lock ordering and verified the deadlock returns when the fix is removed." },
+      { "title": "A race test that never raced", "text": "Mutation testing found a race test that never actually raced; rewritten with a start barrier." },
+      { "title": "A benchmark I retracted", "text": "Caught a contaminated benchmark (an open dashboard causing a full-keyspace SCAN storm), fixed both bugs, retracted the old results, and made the load generator refuse to run while a dashboard is connected." }
+    ],
+    "scale": "~7,500 lines Go + ~4,800 lines Go tests, ~1,400 lines C++, ~1,500 lines TypeScript; 8 required CI checks per PR; 4 design-decision records.",
+    "images": {
+      "dashboard": "./assets/png/clearline-dashboard.png",
+      "chart": "./assets/svg/clearline-benchmark.svg"
+    }
+  },
+  "projects": [
+    {
+      "title": "Low-Latency C++ Trading Infrastructure",
+      "subtitle": "LowLatencyBuffer",
+      "repo": "https://github.com/harshithptl/LowLatencyBuffer",
+      "points": [
+        "Lock-free single-producer/single-consumer queue with cache-line isolation: 5.2 µs P50 submit-to-book (Apple M4).",
+        "Custom slab allocator with zero heap allocation on the hot path; resolved a producer/consumer deadlock.",
+        "Price-time priority matching engine with O(1) insert/cancel/lookup: 1.1 to 1.6 µs per order-book operation.",
+        "Profiled cross-core cache handoff on the M4 at about 1 µs, showing the remaining latency floor was OS scheduler jitter, not the code.",
+        "Now powers Clearline's matching engine over gRPC."
+      ]
+    },
+    {
+      "title": "Options Backtesting Engine",
+      "subtitle": "C++23",
+      "points": [
+        "Processes six years of market data in about 3 seconds.",
+        "Validation (bootstrap resampling, walk-forward testing) caught roughly 50% Sharpe ratio inflation from a methodology flaw."
+      ]
+    },
+    {
+      "title": "RAG Document Q&A",
+      "subtitle": "Local LLM retrieval",
+      "points": [
+        "Retrieval-augmented generation with a locally hosted LLM (llama3.2 via Ollama), embeddings in Qdrant, cosine-similarity retrieval, and evaluation of retrieval and answer quality."
+      ]
+    }
+  ],
+  "moreProjects": [
+    { "title": "Blog platform", "summary": "React, Node.js, Express, MongoDB, bcrypt authentication.", "href": "./bloggity-blog.html" },
+    { "title": "Automatic Number Plate Recognition", "summary": "YOLOv4 + custom OCR, Django APIs.", "href": "./automatic-number-plate-recognition.html" }
+  ],
+  "skills": [
+    { "group": "Languages", "items": ["Java", "Python", "Go", "C++ (C++20/23)", "SQL", "TypeScript", "JavaScript"] },
+    { "group": "Backend", "items": ["Spring Boot", "Django", "FastAPI", "Flask", "gRPC", "REST", "Node.js"] },
+    { "group": "Data and messaging", "items": ["PostgreSQL", "Kafka", "RabbitMQ", "Valkey/Redis", "MongoDB", "MySQL", "Qdrant"] },
+    { "group": "Infrastructure", "items": ["Docker", "AWS", "GCP", "Terraform", "GitHub Actions", "CI/CD", "Linux"] },
+    { "group": "Observability", "items": ["Prometheus", "Grafana", "Sumo Logic"] },
+    { "group": "Frontend", "items": ["React", "TypeScript", "Tailwind"] },
+    { "group": "AI tools", "items": ["Claude Code", "Cursor"] }
+  ]
+}
