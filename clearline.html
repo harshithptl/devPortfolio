@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Clearline | Harshith Patil</title>
+  <meta name="description" content="Clearline: Event-driven trade settlement and double-entry ledger engine" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/png/logo.png" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+<!-- Generated from content.json by scripts/build.mjs. Edit content.json, then run npm run build:html. -->
+<header class="header">
+  <div class="header__content">
+    <div class="header__logo-container">
+      <div class="header__logo-img-cont">
+        <img src="./assets/png/profile-photo.png" alt="Harshith Patil" class="header__logo-img" />
+      </div>
+      <span class="header__logo-sub">Harshith Patil</span>
+    </div>
+    <div class="header__main">
+      <ul class="header__links"><li class="header__link-wrapper"><a href="./index.html" class="header__link">Home</a></li><li class="header__link-wrapper"><a href="./index.html#about" class="header__link">About</a></li><li class="header__link-wrapper"><a href="./index.html#featured" class="header__link">Clearline</a></li><li class="header__link-wrapper"><a href="./index.html#experience" class="header__link">Experience</a></li><li class="header__link-wrapper"><a href="./index.html#projects" class="header__link">Projects</a></li><li class="header__link-wrapper"><a href="./index.html#contact" class="header__link">Contact</a></li></ul>
+      <div class="header__main-ham-menu-cont">
+        <img src="./assets/svg/ham-menu.svg" alt="hamburger menu" class="header__main-ham-menu" />
+        <img src="./assets/svg/ham-menu-close.svg" alt="hamburger menu close" class="header__main-ham-menu-close d-none" />
+      </div>
+    </div>
+  </div>
+  <div class="header__sm-menu"><div class="header__sm-menu-content"><ul class="header__sm-menu-links"><li class="header__sm-menu-link"><a href="./index.html">Home</a></li><li class="header__sm-menu-link"><a href="./index.html#about">About</a></li><li class="header__sm-menu-link"><a href="./index.html#featured">Clearline</a></li><li class="header__sm-menu-link"><a href="./index.html#experience">Experience</a></li><li class="header__sm-menu-link"><a href="./index.html#projects">Projects</a></li><li class="header__sm-menu-link"><a href="./index.html#contact">Contact</a></li></ul></div></div>
+</header>
+<section class="project-cs-hero">
+  <div class="project-cs-hero__content">
+    <h1 class="heading-primary">Clearline</h1>
+    <div class="project-cs-hero__info"><p class="text-primary">Event-driven trade settlement and double-entry ledger engine</p></div>
+    <div class="project-cs-hero__cta"><a href="https://github.com/harshithptl/clearline" class="btn btn--bg" target="_blank" rel="noreferrer">Code on GitHub</a></div>
+  </div>
+</section>
+<section class="project-details">
+  <div class="main-container">
+    <div class="project-details__content">
+      <div class="project-details__desc">
+        <h3 class="project-details__content-title">What it is</h3>
+        <p class="project-details__desc-para">Orders arrive through a REST API, are matched by a C++ matching engine, settled into a Postgres double-entry ledger exactly once, and reflected in a live balance cache and dashboard.</p>
+        <p class="project-details__desc-para">Solo project, Nov 2026. Public repo.</p>
+      </div>
+      <div class="project-details__desc">
+        <h3 class="project-details__content-title">Architecture</h3>
+        <ol class="arch" aria-label="Clearline architecture, in order"><li class="arch__step">REST gateway</li><li class="arch__arrow" aria-hidden="true">&rarr;</li><li class="arch__step arch__step--topic">Kafka: orders</li><li class="arch__arrow" aria-hidden="true">&rarr;</li><li class="arch__step">Matcher adapter</li><li class="arch__arrow" aria-hidden="true">&rarr;</li><li class="arch__step">C++ order book (gRPC)</li><li class="arch__arrow" aria-hidden="true">&rarr;</li><li class="arch__step arch__step--topic">Kafka: trades</li><li class="arch__arrow" aria-hidden="true">&rarr;</li><li class="arch__step">Settlement</li><li class="arch__arrow" aria-hidden="true">&rarr;</li><li class="arch__step">Postgres ledger + transactional outbox</li><li class="arch__arrow" aria-hidden="true">&rarr;</li><li class="arch__step">Outbox relay</li><li class="arch__arrow" aria-hidden="true">&rarr;</li><li class="arch__step arch__step--topic">Kafka: ledger-events</li><li class="arch__arrow" aria-hidden="true">&rarr;</li><li class="arch__step">Balance service</li><li class="arch__arrow" aria-hidden="true">&rarr;</li><li class="arch__step">Valkey</li><li class="arch__arrow" aria-hidden="true">&rarr;</li><li class="arch__step">Dashboard (Server-Sent Events)</li></ol><p class="arch__note">A reconciler continuously verifies the books balance and the cache matches the ledger.</p>
+      </div>
+      <div class="project-details__desc">
+        <h3 class="project-details__content-title">Results</h3>
+        <div class="stats"><div class="stats__item"><div class="stats__value">20x</div><div class="stats__label">throughput, 100 to 2,000 trades/s</div></div><div class="stats__item"><div class="stats__value">&lt; 150 ms</div><div class="stats__label">p99 order-to-ledger up to 2,000 trades/s</div></div><div class="stats__item"><div class="stats__value">0</div><div class="stats__label">double-postings across 992 duplicate deliveries</div></div></div>
+        <ul class="cs-list"><li>Throughput scaled 20x: 100 trades/s baseline, then 731 trades/s (batched, per-partition-concurrent cache updates), then 2,000 trades/s (plus set-based batched settlement). 2,000 was the highest rate offered, so capacity was not reached.</li><li>p99 order-to-ledger under 150 ms at every measured rate up to 2,000 trades/s; p50 12.7 ms at 2,000 trades/s.</li><li>p99 at 250 trades/s: 129 ms to 23 ms (5.6x lower). Cache freshness p99: 4.8 s to 94 ms.</li><li>Correctness: 0 double-postings across 992 duplicate deliveries from 8 concurrent workers, checked against an independent oracle.</li></ul>
+        <p class="context-note"><strong>Measured on:</strong> Apple M4 (4P+6E), 16 GB, macOS, whole stack in Docker Desktop with the load generator on the same machine; full durability (Kafka acks=all on a single broker, Postgres synchronous_commit and fsync on, Valkey appendfsync=always); open-loop load, 30 s per rate, 0 request errors.</p>
+        <img class="cs-figure" src="./assets/svg/clearline-benchmark.svg" alt="Order-to-ledger p99 against settled trades per second for the baseline and the two batching steps" loading="lazy" />
+      </div>
+      <div class="project-details__desc">
+        <h3 class="project-details__content-title">Key engineering</h3>
+        <ul class="cs-list"><li>Exactly-once effect on at-least-once Kafka: idempotent consumers, offsets committed after the DB commit, and a transactional outbox (no dual writes).</li><li>Two-layer order idempotency: Valkey response cache with compare-and-set Lua scripts plus deterministic order IDs deduped in the matcher.</li><li>Deterministic recovery: the in-memory C++ engine replays the Kafka orders log; trade IDs come from Kafka offsets, so replays are byte-identical and downstream dedupe absorbs them.</li><li>Failure handling: exponential backoff with jitter, classified errors, a dead-letter queue with a replay tool, single-active-leader outbox relay via Postgres advisory lock.</li><li>Money as NUMERIC(20,8) end to end; append-only ledger enforced by DB triggers; BigInt fixed point in the browser.</li><li>Prometheus metrics on every service, latency measured via timestamps in Kafka headers, Kafka consumer lag collector, 6 alerts unit-tested with promtool.</li></ul>
+      </div>
+      <div class="project-details__desc">
+        <h3 class="project-details__content-title">Engineering stories</h3>
+        <h4 class="cs-story__title">A deadlock the harness caught</h4><p class="project-details__desc-para">A concurrent test harness exposed a Postgres deadlock between parallel batches; fixed with consistent lock ordering and verified the deadlock returns when the fix is removed.</p><h4 class="cs-story__title">A race test that never raced</h4><p class="project-details__desc-para">Mutation testing found a race test that never actually raced; rewritten with a start barrier.</p><h4 class="cs-story__title">A benchmark I retracted</h4><p class="project-details__desc-para">Caught a contaminated benchmark (an open dashboard causing a full-keyspace SCAN storm), fixed both bugs, retracted the old results, and made the load generator refuse to run while a dashboard is connected.</p>
+      </div>
+      <div class="project-details__desc">
+        <h3 class="project-details__content-title">Live dashboard</h3>
+        <img class="cs-figure" src="./assets/png/clearline-dashboard.png" alt="Clearline dashboard: live balances, order form and trade tape" loading="lazy" />
+      </div>
+      <div class="project-details__tools-used">
+        <h3 class="project-details__content-title">Stack</h3>
+        <div class="skills"><div class="skills__skill">Go (6 microservices)</div><div class="skills__skill">C++20</div><div class="skills__skill">Kafka (KRaft)</div><div class="skills__skill">PostgreSQL</div><div class="skills__skill">Valkey</div><div class="skills__skill">gRPC/protobuf</div><div class="skills__skill">Docker Compose</div><div class="skills__skill">Prometheus</div><div class="skills__skill">React 19 + TypeScript</div><div class="skills__skill">nginx</div><div class="skills__skill">GitHub Actions</div><div class="skills__skill">Playwright</div><div class="skills__skill">Vitest</div></div>
+        <p class="project-details__desc-para cs-scale">~7,500 lines Go + ~4,800 lines Go tests, ~1,400 lines C++, ~1,500 lines TypeScript; 8 required CI checks per PR; 4 design-decision records.</p>
+      </div>
+      <div class="project-details__links">
+        <h3 class="project-details__content-title">See Code</h3>
+        <a href="https://github.com/harshithptl/clearline" class="btn btn--med btn--theme project-details__links-btn" target="_blank" rel="noreferrer">Code on GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="main-footer">
+  <div class="main-container">
+    <div class="main-footer__upper">
+      <div class="main-footer__row main-footer__row-1">
+        <h2 class="heading heading-sm main-footer__heading-sm"><span>Social</span></h2>
+        <div class="main-footer__social-cont"><a href="https://www.linkedin.com/in/harshithptl" class="" target="_blank" rel="noreferrer"><img src="./assets/png/linkedin-ico.png" alt="LinkedIn" class="main-footer__icon" /></a>
+<a href="https://github.com/harshithptl" class="" target="_blank" rel="noreferrer"><img src="./assets/png/github-ico.png" alt="GitHub" class="main-footer__icon" /></a>
+<a href="mailto:harshithptl@gmail.com" class="" target="_blank" rel="noreferrer"><img src="./assets/png/mailbox-icon.png" alt="Email" class="main-footer__icon" /></a></div>
+      </div>
+      <div class="main-footer__row main-footer__row-2">
+        <h4 class="heading heading-sm text-lt">Harshith Patil</h4>
+        <p class="main-footer__short-desc">Software Engineer: backend, distributed systems, and low-latency systems. Boston, MA. MS at Northeastern, December 2026. Available full-time from February 2027.</p>
+      </div>
+    </div>
+    <div class="main-footer__lower">
+      &copy; 2026. Built by <a rel="noreferrer" target="_blank" href="https://github.com/harshithptl">Harshith Patil</a>.
+      Template credits to <a rel="noreferrer" target="_blank" href="https://rammaheshwari.com">Ram Maheshwari</a>.
+    </div>
+  </div>
+</footer>
+<script src="./index.js"></script>
+</body>
+</html>

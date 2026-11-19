@@ -1,0 +1,203 @@
+@use '../abstracts/variables' as *;
+
+// Components for the content.json-driven sections: headline stats, the
+// Clearline architecture flow, measurement context notes, grouped skills,
+// compact internships, project bullet lists.
+
+.featured__card {
+  background: #fff;
+  border-radius: 0.8rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.06);
+  padding: 4rem;
+  @media (max-width: 37.5em) {
+    padding: 2.4rem;
+  }
+}
+
+.featured__summary {
+  font-size: 1.9rem;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+}
+
+.featured__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  margin-top: 3rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 2rem;
+  margin: 2.4rem 0;
+  &__item {
+    border-left: 4px solid $themeClrPrimary;
+    padding: 0.4rem 0 0.4rem 1.6rem;
+  }
+  &__value {
+    font-size: 3.4rem;
+    font-weight: 900;
+    color: $themeClrPrimary;
+    line-height: 1.1;
+  }
+  &__label {
+    font-size: 1.5rem;
+    color: #555;
+    margin-top: 0.6rem;
+  }
+}
+
+.context-note {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: #555;
+  background: #f7f5fa;
+  border-radius: 0.5rem;
+  padding: 1.2rem 1.6rem;
+  margin: 2rem 0;
+}
+
+.arch {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 2.4rem 0 1rem;
+  padding: 0;
+  &__step {
+    font-size: 1.4rem;
+    font-weight: 600;
+    background: #f1f0f0;
+    border-radius: 0.4rem;
+    padding: 0.8rem 1.2rem;
+    &--topic {
+      background: #efe7f6;
+      color: #6b4290;
+    }
+  }
+  &__arrow {
+    font-size: 1.6rem;
+    color: #999;
+  }
+  &__note {
+    font-size: 1.5rem;
+    color: #555;
+  }
+}
+
+.experience__row-dates {
+  font-weight: 400;
+  color: #777;
+  margin-left: 0.6rem;
+}
+
+.experience__row-note {
+  font-size: 1.4rem;
+  color: #777;
+  margin-top: 0.4rem;
+}
+
+.interns {
+  margin-top: 4rem;
+  &__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.4rem;
+  }
+  &__list {
+    list-style: none;
+    padding: 0;
+    li {
+      font-size: 1.6rem;
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+  }
+}
+
+.projects__panel-sub {
+  font-size: 1.5rem;
+  color: #777;
+  margin: -0.8rem 0 1.4rem;
+}
+
+.projects__panel-points,
+.cs-list {
+  font-size: 1.6rem;
+  line-height: 1.7;
+  padding-left: 2rem;
+  margin-bottom: 2rem;
+  li {
+    margin-bottom: 0.8rem;
+  }
+}
+
+.projects__panel-btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.more-projects__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 4rem 0 1.2rem;
+}
+
+.more-projects {
+  font-size: 1.6rem;
+  line-height: 1.8;
+  padding-left: 2rem;
+  a {
+    color: $themeClrPrimary;
+    font-weight: 600;
+  }
+}
+
+.skill-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+  gap: 3rem;
+  &__title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+  }
+}
+
+.about__education-coursework {
+  font-size: 1.3rem;
+  color: #777;
+  margin-top: 0.6rem;
+  line-height: 1.5;
+}
+
+.home-hero__availability {
+  margin-top: 1.2rem;
+}
+
+.contact__email {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.cs-figure {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 2.4rem 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+}
+
+.cs-story__title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 2rem 0 0.6rem;
+}
+
+.cs-scale {
+  margin-top: 2rem;
+}
